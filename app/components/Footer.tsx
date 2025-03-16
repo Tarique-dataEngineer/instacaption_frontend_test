@@ -18,6 +18,21 @@ const Footer = () => {
         Copyright &copy; {new Date().getFullYear()} techie.dev | All rights reserved.
       </p>
 
+      {/* Legal Links */}
+       <ul className="flex gap-4 text-sm text-gray-500">
+        <li>
+          <Link to="/terms" className="hover:text-gray-700"> {/* Route needed for terms*/}
+            Terms & Conditions
+          </Link>
+        </li>
+        <li>
+          <Link to="/privacy" className="hover:text-gray-700"> {/* Route needed forprivacy policy*/}
+            Privacy Policy
+          </Link>
+        </li>
+      </ul>
+
+
       {/* Social Media Links */}
       <div className="flex gap-2.5">
         <Link to="https://www.facebook.com" target="_blank">

@@ -9,6 +9,7 @@ import sample_img_1 from "./sample_img_1.png";
 import sample_img_2 from "./sample_img_2.png";
 import profile_img_1 from "./profile_img_1.png";
 import profile_img_2 from "./profile_img_2.png";
+import profile_img_3 from "./profile_img_3.png";
 import step_icon_1 from "./step_icon_1.svg";
 import step_icon_2 from "./step_icon_2.svg";
 import step_icon_3 from "./step_icon_3.svg";
@@ -70,27 +71,35 @@ export const stepsData = [
 
 export const testimonialsData = [
   {
-    image: profile_img_1,
-    name: "Donald Jackman",
-    role: "Graphic Designer",
+    image: "https://randomuser.me/api/portraits/women/10.jpg",
+    name: "Ananya Sharma",
+    role: "Social Media Influencer",
     stars: 5,
-    text: `I've been using bg.removal for nearly two years, primarily for Instagram, and it has been incredibly user-friendly, making my work much easier.`,
+    text: "Instacaptions.ai has completely changed how I create Instagram captions! The AI understands my pictures so well that the captions feel natural and engaging. Saves me so much time!",
   },
   {
-    image: profile_img_2,
-    name: "Richard Nelson",
+    image: "https://randomuser.me/api/portraits/men/15.jpg",
+    name: "Rohan Mehta",
+    role: "Travel Blogger",
+    stars: 4.8,
+    text: "I used to spend hours thinking of the right caption for my travel shots. Now, this AI generates perfect captions in seconds, matching the emotions and scenery in my photos!",
+  },
+  {
+    image: profile_img_3,
+    name: "Priya Desai",
+    role: "Photographer",
+    stars: 5,
+    text: "The AI not only recognizes objects in my photos but also understands emotions! It creates captions that truly resonate with the mood of my pictures. Highly recommended!",
+  },
+  {
+    image: profile_img_1,
+    name: "Arjun Verma",
     role: "Content Creator",
-    stars: 4,
-    text: `I've been using bg.removal for nearly two years, primarily for Instagram, and it has been incredibly user-friendly, making my work much easier.`,
-  },
-  {
-    image: profile_img_1,
-    name: "Donald Jackman",
-    role: "Graphic Designer",
-    stars: 5,
-    text: `I've been using bg.removal for nearly two years, primarily for Instagram, and it has been incredibly user-friendly, making my work much easier.`,
+    stars: 4.9,
+    text: "From witty one-liners to deep, meaningful quotes, Instacaptions.ai delivers the best captions based on the image context. It's like having a personal caption writer!",
   },
 ];
+
 
 export const plans = [
   {
