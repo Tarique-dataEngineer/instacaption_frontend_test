@@ -4,6 +4,7 @@ import { AppContext } from "~/context/AppContextProvider"; // Correct Remix path
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import axios from "axios";
+import ProfileSettings from "~/components/ProfileSettings";
 
 const Login = () => {
   const context = useContext(AppContext);
@@ -11,7 +12,7 @@ const Login = () => {
     throw new Error("AppContext must be used within an AppContextProvider");
   }
   
-  const { setShowLogin, backendUrl, setToken, setUser } = context;
+  const { setShowLogin, backendUrl, setToken, setUser, user } = context;
 
   const [state, setState] = useState("Login");
   const [name, setName] = useState("");
@@ -19,6 +20,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [otp, setOtp] = useState("");
   const [showOTPField, setShowOTPField] = useState(false);
+  const [showAvatarSelection, setShowAvatarSelection] = useState(false);
 
   // This helper now uses axios to match your previous implementation.
   const fetchAPI = async (endpoint: string, body: any) => {
@@ -84,13 +86,17 @@ const Login = () => {
   const loginUser = async () => {
     const data = await fetchAPI("/api/user/login", { email, password });
     if (data?.success) {
-      setToken(data.token);
-      setUser(data.user);
-      if (typeof window !== "undefined") {
-        localStorage.setItem("token", data.token);
+      if (!data.user.avatar) {
+        setShowAvatarSelection(true);
+      } else {
+        setToken(data.token);
+        setUser(data.user);
+        if (typeof window !== "undefined") {
+          localStorage.setItem("token", data.token);
+        }
+        setShowLogin(false);
+        toast.success("Login successful");
       }
-      setShowLogin(false);
-      toast.success("Login successful");
     } else {
       toast.error(data?.message || "Login failed");
     }
@@ -104,6 +110,18 @@ const Login = () => {
     if (state === "Forgot Password") return requestPasswordReset();
     if (state === "Login") return loginUser();
   };
+
+  const handleAvatarSelect = async (avatarUrl: string) => {
+    const data = await fetchAPI("/api/user/update-avatar", { avatarUrl });
+    if (data?.success) {
+      setToken(data.token);
+      setUser({ ...data.user, avatar: avatarUrl });
+      setShowLogin(false);
+      toast.success("Avatar selected successfully!");
+    }
+  };
+
+
 
   useEffect(() => {
     document.body.style.overflow = "hidden";
@@ -181,6 +199,12 @@ const Login = () => {
             />
           </div>
         )}
+        {showAvatarSelection && (
+          <ProfileSettings
+          onAvatarSelect={handleAvatarSelect}
+          currentAvatar={user?.avatar || null}
+          />
+          )}
 
         {/* Forgot Password Link */}
         <p

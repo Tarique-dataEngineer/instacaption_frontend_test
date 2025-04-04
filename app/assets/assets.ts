@@ -22,6 +22,12 @@ import profile_icon from "./profile_icon.png";
 import instaC_logo from "./instaC_logo.png";
 import copy_icon from "./copy_icon.png";
 import david from "./david.png";
+import avatar_image01 from "./avatar_image01.png";
+import avatar_image02 from "./avatar_image02.png";
+import avatar_image03 from "./avatar_image03.png";
+import avatar_image04 from "./avatar_image04.png";
+import avatar_image05 from "./avatar_image05.png";
+import avatar_image06 from "./avatar_image06.png";
 
 
 
@@ -44,7 +50,14 @@ export const assets = {
   profile_icon,
   instaC_logo,
   copy_icon,
-  david
+  david,
+  avatar_image01,
+  avatar_image02,
+  avatar_image03,
+  avatar_image04,
+  avatar_image05,
+  avatar_image06,
+  
 
   
 };
