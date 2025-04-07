@@ -4,6 +4,7 @@ import { AppContext } from "~/context/AppContextProvider"; // Correct Remix path
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
 import axios from "axios";
+import { AVATAR_OPTIONS } from "~/assets/assets";
 
 const Login = () => {
   const context = useContext(AppContext);
@@ -19,6 +20,34 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [otp, setOtp] = useState("");
   const [showOTPField, setShowOTPField] = useState(false);
+
+  const [selectedAvatar, setSelectedAvatar] = useState(AVATAR_OPTIONS[0]);
+
+  const AvatarSelector = () => {
+    return (
+      <div className="mt-4">
+        <p className="text-sm mb-2">Choose your avatar:</p>
+        <div className="grid grid-cols-3 gap-2">
+          {AVATAR_OPTIONS.map((avatar, index) => (
+            <div 
+              key={index}
+              onClick={() => setSelectedAvatar(avatar)}
+              className={`cursor-pointer p-1 rounded-lg ${
+                selectedAvatar === avatar ? 'ring-2 ring-blue-500' : ''
+              }`}
+            >
+              <img 
+                src={avatar} 
+                alt={`Avatar ${index + 1}`}
+                className="w-12 h-12 rounded-full"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  };
+
 
   // This helper now uses axios to match your previous implementation.
   const fetchAPI = async (endpoint: string, body: any) => {
@@ -58,7 +87,8 @@ const Login = () => {
   };
 
   const registerUser = async () => {
-    const data = await fetchAPI("/api/user/register", { name, email, password });
+    const data = await fetchAPI("/api/user/register", { name, email, password,
+      avatar: selectedAvatar });
     if (data?.success) {
       setToken(data.token);
       setUser(data.user);
@@ -138,6 +168,7 @@ const Login = () => {
             />
           </div>
         )}
+        {state === "Sign Up" && !showOTPField && <AvatarSelector />}
 
         {/* Email Input Field */}
         <div className="border px-4 py-2 flex items-center rounded-full mt-4">
@@ -236,5 +267,7 @@ const Login = () => {
     </div>
   );
 };
+
+
 
 export default Login;

@@ -25,7 +25,6 @@ import david from "./david.png";
 
 
 
-
 export const assets = {
   logo,
   logo_icon,
@@ -44,10 +43,18 @@ export const assets = {
   profile_icon,
   instaC_logo,
   copy_icon,
-  david
-
+  david,
   
 };
+
+export const AVATAR_OPTIONS = [
+  '/avatars/avatar_image01.jpg',
+  '/avatars/avatar_image02.jpg',
+  '/avatars/avatar_image03.jpg',
+  '/avatars/avatar_image04.jpg',
+  '/avatars/avatar_image05.jpg',
+  '/avatars/avatar_image06.jpg'
+];
 
 export const stepsData = [
   {

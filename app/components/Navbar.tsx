@@ -1,12 +1,15 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "@remix-run/react";
 import { AppContext } from "../context/AppContextProvider";
 import { assets } from "../assets/assets";
 import Login from "~/components/Login"; // ✅ Ensure Login is correctly imported
+import ProfileMenu from "~/components/ProfileMenu";
 
 const Navbar: React.FC = () => {
   const context = useContext(AppContext);
   const navigate = useNavigate();
+
+  const [showProfileMenu, setShowProfileMenu] = useState(false);
 
   if (!context) {
     console.error("Navbar must be used within an AppContextProvider");
@@ -42,26 +45,25 @@ const Navbar: React.FC = () => {
               {/* User Greeting */}
               <p className="text-gray-600 max-sm:hidden pl-4">Hi, {user.name}</p>
 
-              {/* Profile Dropdown */}
-              <div className="relative group">
-                <img
-                  src={assets.profile_icon}
-                  className="w-10 drop-shadow cursor-pointer"
-                  alt="Profile Icon"
+            {/* Profile Menu */}
+            <div className="relative">
+              <img
+                src={user.avatar || assets.profile_icon}
+                className="w-10 h-10 rounded-full drop-shadow cursor-pointer"
+                alt="Profile"
+                onClick={() => setShowProfileMenu(!showProfileMenu)}
+              />
+              {showProfileMenu && (
+                <ProfileMenu 
+                  onClose={() => {
+                    setShowProfileMenu(false);
+                    logout();
+                  }} 
                 />
-                <div
-                  className="absolute hidden group-hover:block top-0 right-0 z-10 text-black 
-                  rounded pt-12"
-                >
-                  <ul className="list-none m-0 p-2 bg-white rounded-md border text-sm">
-                    <li onClick={logout} className="py-1 px-2 cursor-pointer pr-10 hover:bg-gray-100">
-                      Logout
-                    </li>
-                  </ul>
-                </div>
-              </div>
+              )}
             </div>
-          ) : (
+          </div>
+        ) : (
             <div className="flex items-center gap-2 sm:gap-5">
               {/* Pricing Link */}
               <p onClick={() => navigate("/buy")} className="cursor-pointer">
